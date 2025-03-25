@@ -137,8 +137,29 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				display: ['Bangers', 'cursive']
-			}
+			},
+			textShadow: {
+				sm: '0 1px 2px rgba(0, 0, 0, 0.4)',
+				md: '0 2px 4px rgba(0, 0, 0, 0.6)',
+				lg: '0 3px 6px rgba(0, 0, 0, 0.8)',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		// Add text-shadow plugin
+		function ({ addUtilities, theme }: any) {
+			const textShadows = theme('textShadow', {});
+			const utilities = Object.entries(textShadows).reduce(
+				(acc, [key, value]) => ({
+					...acc,
+					[`.text-shadow-${key}`]: {
+						textShadow: value,
+					},
+				}),
+				{}
+			);
+			addUtilities(utilities);
+		},
+	],
 } satisfies Config;

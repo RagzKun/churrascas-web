@@ -11,6 +11,7 @@ const Hero = () => {
     <div 
       ref={heroRef} 
       className="min-h-screen relative flex items-center justify-center animate-on-scroll pt-16"
+      id="hero"
     >
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
@@ -18,6 +19,7 @@ const Hero = () => {
         <div 
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: 'url("/assets/hero-background.jpg")' }}
+          aria-hidden="true" /* Accessibility improvement */
         ></div>
       </div>
       
@@ -38,26 +40,27 @@ const Hero = () => {
           </div>
           
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 text-shadow-lg">
             Churrascas Artesanales Hechas con Tradición
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl font-medium text-white/90 mb-8">
+          <p className="text-xl md:text-2xl font-medium text-white mb-8 text-shadow-md">
             Personaliza tu pedido y ordénalo en 3 minutos | Retira en Las Delicias 101
           </p>
           
-          {/* CTA Button */}
+          {/* CTA Button - Improved for accessibility */}
           <a 
             href="#productos" 
             className="inline-flex items-center bg-churrasca-600 text-white px-8 py-4 rounded-lg text-lg font-medium 
-            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl"
+            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl focus-visible-ring"
+            aria-label="Ver menú de churrascas"
           >
-            Ver Menú <ArrowRight className="ml-2 h-5 w-5" />
+            Ver Menú <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
           </a>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2" aria-hidden="true">
             <div className="animate-float">
               <div className="w-1 h-16 mx-auto">
                 <div className="w-1 h-8 bg-white/50 rounded-full mx-auto mb-1"></div>

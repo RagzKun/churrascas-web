@@ -34,7 +34,7 @@ const Navbar = ({
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <span className="font-display text-2xl font-medium text-churrasca-900">
+          <span className="font-display text-2xl font-normal text-churrasca-900">
             Churrascas<span className="text-churrasca-600">101</span>
           </span>
         </a>

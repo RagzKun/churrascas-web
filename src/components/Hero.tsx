@@ -14,7 +14,7 @@ const Hero = () => {
     >
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-churrasca-950/70 via-churrasca-900/30 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-churrasca-900/70 via-churrasca-800/30 to-transparent z-10"></div>
         <div 
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: 'url("/assets/hero-background.jpg")' }}
@@ -28,17 +28,17 @@ const Hero = () => {
         >
           {/* Logo */}
           <div className="mb-8 opacity-90">
-            <div className="inline-block bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-lg">
+            <div className="inline-block bg-white/90 backdrop-blur-sm p-6 rounded-full shadow-lg">
               <img 
-                src="/assets/logo.png" 
+                src="/lovable-uploads/4c455362-0d83-4f8b-b212-7b3daa814c87.png" 
                 alt="Churrascas Las Delicias 101" 
-                className="h-24 w-24 object-contain"
+                className="h-28 w-28 object-contain"
               />
             </div>
           </div>
           
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4">
             Churrascas Artesanales Hechas con Tradición
           </h1>
           

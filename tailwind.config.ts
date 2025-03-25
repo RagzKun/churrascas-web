@@ -64,17 +64,17 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				churrasca: {
-					50: '#FEF8F2',
-					100: '#FDF0E2',
-					200: '#FADCBC',
-					300: '#F7C796',
-					400: '#F1B370',
-					500: '#EB994A',
-					600: '#D5803B',
-					700: '#B0622F',
-					800: '#8B4B27',
-					900: '#663822',
-					950: '#422418',
+					50: '#FFF5F5',
+					100: '#FFE0E0',
+					200: '#FFC0C0',
+					300: '#FF9A9A',
+					400: '#FF7070',
+					500: '#FF4A4A',
+					600: '#FF2424',
+					700: '#E60000',
+					800: '#B80000',
+					900: '#940000',
+					950: '#620000',
 				}
 			},
 			borderRadius: {
@@ -136,7 +136,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				display: ['Playfair Display', 'serif']
+				display: ['Bangers', 'cursive']
 			}
 		}
 	},

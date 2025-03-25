@@ -5,76 +5,84 @@ export const products: Product[] = [
   {
     id: "churrasca-tradicional",
     name: "Churrasca Tradicional",
-    description: "Nuestra churrasca clásica, hecha con receta tradicional del sur de Chile, con un toque de mantequilla.",
+    description: "Nuestra churrasca clásica, hecha con receta tradicional del sur de Chile.",
     price: 2500,
     image: "/assets/churrasca-tradicional.jpg",
     extras: [
       { id: "queso", name: "Queso", price: 500 },
       { id: "jamon", name: "Jamón", price: 500 },
       { id: "palta", name: "Palta", price: 700 },
+      { id: "huevo", name: "Huevo", price: 600 },
+      { id: "longaniza", name: "Longaniza", price: 900 },
       { id: "tomate", name: "Tomate", price: 300 }
     ]
   },
   {
-    id: "churrasca-integral",
-    name: "Churrasca Integral",
-    description: "Versión saludable hecha con harina integral, ideal para quienes buscan una opción más nutritiva.",
-    price: 2800,
-    image: "/assets/churrasca-integral.jpg",
+    id: "churrasca-palta",
+    name: "Churrasca Palta",
+    description: "Deliciosa churrasca con una generosa porción de palta fresca.",
+    price: 3200,
+    image: "/assets/churrasca-palta.jpg",
+    extras: [
+      { id: "queso", name: "Queso", price: 500 },
+      { id: "jamon", name: "Jamón", price: 500 },
+      { id: "huevo", name: "Huevo", price: 600 },
+      { id: "longaniza", name: "Longaniza", price: 900 },
+      { id: "tomate", name: "Tomate", price: 300 }
+    ]
+  },
+  {
+    id: "churrasca-queso-jamon",
+    name: "Churrasca Queso/Jamón",
+    description: "Churrasca con el clásico sabor del queso derretido y jamón premium.",
+    price: 3500,
+    image: "/assets/churrasca-queso-jamon.jpg",
+    extras: [
+      { id: "palta", name: "Palta", price: 700 },
+      { id: "huevo", name: "Huevo", price: 600 },
+      { id: "longaniza", name: "Longaniza", price: 900 },
+      { id: "tomate", name: "Tomate", price: 300 }
+    ]
+  },
+  {
+    id: "churrasca-huevo",
+    name: "Churrasca Huevo",
+    description: "Con huevo frito perfectamente cocinado, una opción contundente y deliciosa.",
+    price: 3100,
+    image: "/assets/churrasca-huevo.jpg",
     extras: [
       { id: "queso", name: "Queso", price: 500 },
       { id: "jamon", name: "Jamón", price: 500 },
       { id: "palta", name: "Palta", price: 700 },
+      { id: "longaniza", name: "Longaniza", price: 900 },
       { id: "tomate", name: "Tomate", price: 300 }
     ]
   },
   {
-    id: "churrasca-ajo",
-    name: "Churrasca de Ajo",
-    description: "Con un delicioso toque de ajo y hierbas, perfecta para acompañar cualquier comida.",
-    price: 2700,
-    image: "/assets/churrasca-ajo.jpg",
+    id: "churrasca-ave-mayo",
+    name: "Churrasca Ave Mayo",
+    description: "Churrasca con pechuga de ave desmenuzada y mayonesa casera.",
+    price: 3700,
+    image: "/assets/churrasca-ave-mayo.jpg",
     extras: [
       { id: "queso", name: "Queso", price: 500 },
-      { id: "jamon", name: "Jamón", price: 500 },
       { id: "palta", name: "Palta", price: 700 },
+      { id: "huevo", name: "Huevo", price: 600 },
       { id: "tomate", name: "Tomate", price: 300 }
     ]
   },
   {
-    id: "churrasca-queso",
-    name: "Churrasca con Queso",
-    description: "Nuestra churrasca tradicional con queso derretido en su interior, simplemente irresistible.",
-    price: 3000,
-    image: "/assets/churrasca-queso.jpg",
+    id: "churrasca-mechada",
+    name: "Churrasca Mechada de Cerdo",
+    description: "La opción más contundente: jugosa carne mechada de cerdo con nuestro aderezo especial.",
+    price: 4200,
+    image: "/assets/churrasca-mechada.jpg",
     extras: [
-      { id: "jamon", name: "Jamón", price: 500 },
+      { id: "queso", name: "Queso", price: 500 },
       { id: "palta", name: "Palta", price: 700 },
+      { id: "huevo", name: "Huevo", price: 600 },
+      { id: "longaniza", name: "Longaniza", price: 900 },
       { id: "tomate", name: "Tomate", price: 300 }
-    ]
-  },
-  {
-    id: "pack-familiar",
-    name: "Pack Familiar",
-    description: "Ideal para compartir en familia: 6 churrascas tradicionales a un precio especial.",
-    price: 12000,
-    image: "/assets/pack-familiar.jpg",
-    extras: [
-      { id: "queso-pack", name: "Queso (todas)", price: 2500 },
-      { id: "jamon-pack", name: "Jamón (todas)", price: 2500 },
-      { id: "palta-pack", name: "Palta (todas)", price: 3500 }
-    ]
-  },
-  {
-    id: "pack-mixto",
-    name: "Pack Mixto",
-    description: "Variedad para todos los gustos: 2 tradicionales, 2 integrales y 2 de ajo.",
-    price: 13500,
-    image: "/assets/pack-mixto.jpg",
-    extras: [
-      { id: "queso-pack", name: "Queso (todas)", price: 2500 },
-      { id: "jamon-pack", name: "Jamón (todas)", price: 2500 },
-      { id: "palta-pack", name: "Palta (todas)", price: 3500 }
     ]
   }
 ];
@@ -91,7 +99,7 @@ export const faqs = [
   },
   {
     question: "¿Tienen opciones para personas con restricciones alimentarias?",
-    answer: "Sí, ofrecemos opciones integrales y puedes consultar por versiones sin gluten o veganas."
+    answer: "Consulta por opciones especiales a través de nuestro WhatsApp, podemos adaptar algunas opciones según tus necesidades."
   },
   {
     question: "¿Hacen entregas a domicilio?",
@@ -99,7 +107,11 @@ export const faqs = [
   },
   {
     question: "¿Puedo hacer pedidos para eventos o cantidades grandes?",
-    answer: "¡Claro! Para pedidos de más de 50 unidades, contáctanos directamente por WhatsApp para obtener precios especiales."
+    answer: "¡Claro! Para pedidos de más de 20 unidades, contáctanos directamente por WhatsApp para obtener precios especiales."
+  },
+  {
+    question: "¿Ofrecen opciones de bebidas?",
+    answer: "Sí, ofrecemos café, té, milo y leche con autoservicio presencial en nuestro local."
   }
 ];
 

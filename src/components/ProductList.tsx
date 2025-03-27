@@ -26,7 +26,7 @@ const ProductList = ({ openModal }: ProductListProps) => {
           <h2 className="text-3xl md:text-4xl font-semibold text-churrasca-900">
             Churrascas Artesanales
           </h2>
-          <p className="mt-4 text-churrasca-700 max-w-2xl mx-auto">
+          <p className="mt-4 text-black max-w-2xl mx-auto">
             Todas nuestras churrascas son elaboradas diariamente con ingredientes frescos y de alta calidad, 
             siguiendo recetas tradicionales del sur de Chile.
           </p>

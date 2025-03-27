@@ -16,7 +16,7 @@ const Hero = () => {
     >
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-churrasca-900/70 via-churrasca-800/30 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-churrasca-900/50 via-churrasca-800/30 to-transparent z-10"></div>
         <div 
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: 'url("/assets/hero-background.jpg")' }}
@@ -24,7 +24,7 @@ const Hero = () => {
         ></div>
       </div>
       
-      <div className="container mx-auto px-4 z-10">
+      <div className="container mx-auto px-4 z-20">
         <div 
           ref={contentRef}
           className="max-w-3xl mx-auto text-center stagger-animation"
@@ -48,19 +48,19 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Title with animated gradient */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 text-shadow-lg relative">
+          {/* Title with animated gradient - Adjusted for better visibility */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 text-shadow-lg relative z-10">
             <span className="absolute -inset-1 -skew-y-3 bg-churrasca-600/30 blur-xl" aria-hidden="true"></span>
             <span className="relative">Churrascas Artesanales Hechas con Tradición</span>
           </h1>
           
           {/* Subtitle with improved visibility */}
-          <p className="text-xl md:text-2xl font-medium text-white mb-8 text-shadow-md bg-black/20 backdrop-blur-sm inline-block px-4 py-2 rounded-lg">
+          <p className="text-xl md:text-2xl font-medium text-white mb-8 text-shadow-md bg-black/20 backdrop-blur-sm inline-block px-4 py-2 rounded-lg relative z-10">
             Personaliza tu pedido y ordénalo en 3 minutos | Retira en Las Delicias 101
           </p>
           
           {/* CTA Button - Enhanced */}
-          <div className="relative inline-block group">
+          <div className="relative inline-block group z-10">
             <div className="absolute -inset-1 bg-gradient-to-r from-churrasca-600 to-churrasca-800 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-500 group-hover:duration-200" aria-hidden="true"></div>
             <a 
               href="#productos" 
@@ -73,7 +73,7 @@ const Hero = () => {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2" aria-hidden="true">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10" aria-hidden="true">
             <div className="animate-float">
               <div className="w-1 h-16 mx-auto">
                 <div className="w-1 h-8 bg-white/50 rounded-full mx-auto mb-1"></div>

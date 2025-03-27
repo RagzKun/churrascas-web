@@ -14,9 +14,8 @@ const Hero = () => {
       className="min-h-screen relative flex items-center justify-center animate-on-scroll pt-16"
       id="hero"
     >
-      {/* Background with overlay */}
+      {/* Background image only */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-churrasca-900/30 via-churrasca-800/20 to-transparent z-10"></div>
         <div 
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: 'url("/assets/hero-background.jpg")' }}
@@ -24,7 +23,11 @@ const Hero = () => {
         ></div>
       </div>
       
-      <div className="container mx-auto px-4 z-30">
+      {/* Dark overlay to improve text readability */}
+      <div className="absolute inset-0 bg-black/50 z-10"></div>
+      
+      {/* Content container with higher z-index */}
+      <div className="container mx-auto px-4 relative z-20">
         <div 
           ref={contentRef}
           className="max-w-3xl mx-auto text-center stagger-animation"
@@ -48,32 +51,28 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Title with animated gradient - Adjusted for better visibility */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 text-shadow-lg relative z-20">
-            <span className="absolute -inset-1 -skew-y-3 bg-churrasca-600/30 blur-xl" aria-hidden="true"></span>
-            <span className="relative">Churrascas Artesanales Hechas con Tradición</span>
+          {/* Title - Simplified with stronger contrast */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            Churrascas Artesanales Hechas con Tradición
           </h1>
           
-          {/* Subtitle with improved visibility */}
-          <p className="text-xl md:text-2xl font-medium text-white mb-8 text-shadow-md bg-black/20 backdrop-blur-sm inline-block px-4 py-2 rounded-lg relative z-20">
+          {/* Subtitle - Simplified with better visibility */}
+          <p className="text-xl md:text-2xl font-medium text-white mb-8 drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] bg-black/30 backdrop-blur-sm inline-block px-4 py-2 rounded-lg">
             Personaliza tu pedido y ordénalo en 3 minutos | Retira en Las Delicias 101
           </p>
           
-          {/* CTA Button - Enhanced */}
-          <div className="relative inline-block group z-20">
-            <div className="absolute -inset-1 bg-gradient-to-r from-churrasca-600 to-churrasca-800 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-500 group-hover:duration-200" aria-hidden="true"></div>
-            <a 
-              href="#productos" 
-              className="relative inline-flex items-center bg-churrasca-600 text-white px-8 py-4 rounded-lg text-lg font-medium 
-              transition-all duration-300 hover:bg-churrasca-700 group-hover:scale-105 hover:shadow-xl focus-visible-ring"
-              aria-label="Ver menú de churrascas"
-            >
-              Ver Menú <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </a>
-          </div>
+          {/* CTA Button */}
+          <a 
+            href="#productos" 
+            className="inline-flex items-center bg-churrasca-600 text-white px-8 py-4 rounded-lg text-lg font-medium 
+            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl focus-visible-ring"
+            aria-label="Ver menú de churrascas"
+          >
+            Ver Menú <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+          </a>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20" aria-hidden="true">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2" aria-hidden="true">
             <div className="animate-float">
               <div className="w-1 h-16 mx-auto">
                 <div className="w-1 h-8 bg-white/50 rounded-full mx-auto mb-1"></div>

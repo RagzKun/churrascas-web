@@ -11,26 +11,26 @@ const Hero = () => {
   return (
     <div 
       ref={heroRef} 
-      className="min-h-screen relative flex items-center justify-center animate-on-scroll pt-16"
+      className="min-h-screen relative flex items-center justify-center overflow-hidden pt-16"
       id="hero"
     >
-      {/* Background image only */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: 'url("/assets/hero-background.jpg")' }}
-          aria-hidden="true"
-        ></div>
-      </div>
+      {/* Background image with a specific z-index */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ 
+          backgroundImage: 'url("/assets/hero-background.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'brightness(0.5)'
+        }}
+        aria-hidden="true"
+      />
       
-      {/* Dark overlay to improve text readability */}
-      <div className="absolute inset-0 bg-black/50 z-10"></div>
-      
-      {/* Content container with higher z-index */}
-      <div className="container mx-auto px-4 relative z-20">
+      {/* Content with guaranteed visibility */}
+      <div className="container mx-auto px-4 relative z-10">
         <div 
           ref={contentRef}
-          className="max-w-3xl mx-auto text-center stagger-animation"
+          className="max-w-3xl mx-auto text-center"
         >
           {/* Attention-grabbing hook element */}
           <div className="mb-4 animate-bounce">
@@ -51,13 +51,13 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Title - Simplified with stronger contrast */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          {/* Title with guaranteed visibility */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 font-bold">
             Churrascas Artesanales Hechas con Tradición
           </h1>
           
-          {/* Subtitle - Simplified with better visibility */}
-          <p className="text-xl md:text-2xl font-medium text-white mb-8 drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] bg-black/30 backdrop-blur-sm inline-block px-4 py-2 rounded-lg">
+          {/* Subtitle with guaranteed visibility */}
+          <p className="text-xl md:text-2xl text-white mb-8 font-medium px-4 py-2 bg-black/30 inline-block rounded-lg">
             Personaliza tu pedido y ordénalo en 3 minutos | Retira en Las Delicias 101
           </p>
           
@@ -65,7 +65,7 @@ const Hero = () => {
           <a 
             href="#productos" 
             className="inline-flex items-center bg-churrasca-600 text-white px-8 py-4 rounded-lg text-lg font-medium 
-            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl focus-visible-ring"
+            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl"
             aria-label="Ver menú de churrascas"
           >
             Ver Menú <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />

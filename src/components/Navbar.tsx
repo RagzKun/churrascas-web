@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, Instagram } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import ThemeToggle from './ThemeToggle';
 
@@ -66,6 +66,17 @@ const Navbar = ({
             FAQ
           </a>
 
+          {/* Instagram Icon */}
+          <a 
+            href="https://www.instagram.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`${isScrolled ? 'text-black dark:text-white' : 'text-white'} hover:text-churrasca-600 transition-colors focus-visible-ring rounded-md`}
+            aria-label="Síguenos en Instagram"
+          >
+            <Instagram className="h-5 w-5" aria-hidden="true" />
+          </a>
+
           {/* Theme Toggle */}
           <ThemeToggle />
 
@@ -87,6 +98,17 @@ const Navbar = ({
 
         {/* Mobile Menu Button */}
         <div className="flex items-center md:hidden">
+          {/* Instagram Icon for Mobile */}
+          <a 
+            href="https://www.instagram.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`${isScrolled ? 'text-black dark:text-white' : 'text-white'} p-1 mx-2 focus-visible-ring rounded-md`}
+            aria-label="Síguenos en Instagram"
+          >
+            <Instagram className="h-5 w-5" aria-hidden="true" />
+          </a>
+
           {/* Theme Toggle */}
           <ThemeToggle />
           

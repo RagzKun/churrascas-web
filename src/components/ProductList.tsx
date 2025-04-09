@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ProductCard from './ProductCard';
+import CommentsSection from './CommentsSection';
 import { Product } from '../context/CartContext';
 import { products } from '../lib/productData';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -40,6 +41,19 @@ const ProductList = ({ openModal }: ProductListProps) => {
               openModal={openModal}
             />
           ))}
+        </div>
+        
+        {/* Comments Section */}
+        <div className="mt-16">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-churrasca-900">Opiniones de Clientes</h2>
+            <p className="mt-2 text-churrasca-700">
+              Comparte tu experiencia con nuestras churrascas
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <CommentsSection />
+          </div>
         </div>
       </div>
     </section>

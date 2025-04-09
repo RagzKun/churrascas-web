@@ -4,9 +4,11 @@ import { MessageCircle, Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
-import { Form, FormField, FormItem, FormLabel, FormControl } from './ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 // Simple type for comments
 interface Comment {
@@ -15,6 +17,14 @@ interface Comment {
   text: string;
   timestamp: number;
 }
+
+// Form schema with validation
+const commentFormSchema = z.object({
+  name: z.string().min(1, { message: 'Por favor ingresa tu nombre' }),
+  comment: z.string().min(1, { message: 'Por favor ingresa un comentario' })
+});
+
+type CommentFormValues = z.infer<typeof commentFormSchema>;
 
 // Use localStorage for persistent storage
 const getLocalComments = (): Comment[] => {
@@ -37,24 +47,20 @@ const CommentsSection = () => {
     setComments(getLocalComments());
   }, []);
 
-  // Form handling
-  const form = useForm({
+  // Form handling with validation
+  const form = useForm<CommentFormValues>({
+    resolver: zodResolver(commentFormSchema),
     defaultValues: {
       name: '',
       comment: ''
     }
   });
 
-  const onSubmit = (data: { name: string; comment: string }) => {
-    if (!data.name.trim() || !data.comment.trim()) {
-      toast.error('Por favor completa todos los campos');
-      return;
-    }
-
+  const onSubmit = (values: CommentFormValues) => {
     const newComment: Comment = {
       id: Date.now().toString(),
-      name: data.name,
-      text: data.comment,
+      name: values.name,
+      text: values.comment,
       timestamp: Date.now()
     };
 
@@ -88,39 +94,51 @@ const CommentsSection = () => {
       </div>
 
       {/* Comment form */}
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8 space-y-4">
-        <FormItem>
-          <FormLabel htmlFor="name">Nombre</FormLabel>
-          <FormControl>
-            <Input
-              id="name"
-              placeholder="Tu nombre"
-              {...form.register('name')}
-              className="border-churrasca-200 focus-visible:ring-churrasca-500"
-            />
-          </FormControl>
-        </FormItem>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8 space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nombre</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Tu nombre"
+                    className="border-churrasca-200 focus-visible:ring-churrasca-500"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <FormItem>
-          <FormLabel htmlFor="comment">Comentario</FormLabel>
-          <FormControl>
-            <Textarea
-              id="comment"
-              placeholder="Comparte tu experiencia con nuestras churrascas..."
-              className="min-h-[100px] border-churrasca-200 focus-visible:ring-churrasca-500"
-              {...form.register('comment')}
-            />
-          </FormControl>
-        </FormItem>
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Comentario</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Comparte tu experiencia con nuestras churrascas..."
+                    className="min-h-[100px] border-churrasca-200 focus-visible:ring-churrasca-500"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <Button 
-          type="submit" 
-          className="bg-churrasca-600 hover:bg-churrasca-700 text-white"
-        >
-          <Send className="h-4 w-4 mr-2" />
-          Enviar Comentario
-        </Button>
-      </form>
+          <Button 
+            type="submit" 
+            className="bg-churrasca-600 hover:bg-churrasca-700 text-white"
+          >
+            <Send className="h-4 w-4 mr-2" />
+            Enviar Comentario
+          </Button>
+        </form>
+      </Form>
 
       {/* Comments list */}
       <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">

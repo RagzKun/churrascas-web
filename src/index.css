@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -198,5 +199,92 @@
   
   button, a {
     forced-color-adjust: none;
+  }
+}
+
+.flames-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  z-index: 0;
+}
+
+.flame-wrapper {
+  position: absolute;
+  bottom: -65%; /* Positioned lower to only show at bottom */
+  left: 0;
+  width: 100%;
+  height: 75%; /* Reduced height */
+  transform: scale(1.5);
+}
+
+.offset-right {
+  left: 25%;
+  bottom: -55%;
+  transform: scale(1.2);
+}
+
+.offset-left {
+  left: -25%;
+  bottom: -65%;
+  transform: scale(1.3);
+}
+
+.flame {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 0 0;
+  transform-origin: center bottom;
+  opacity: 0.5;
+}
+
+.red {
+  animation: scaleUpDown 2s ease-in-out infinite;
+  background: linear-gradient(to top, #ff0000, #ff4d00);
+  animation-delay: 0.2s;
+}
+
+.orange {
+  animation: scaleUpDown 2.3s ease-in-out infinite, side-to-side 2.5s ease-in-out infinite alternate;
+  background: linear-gradient(to top, #ff4d00, #ffa700);
+  animation-delay: 0.3s;
+  height: 95%;
+}
+
+.gold {
+  animation: scaleUpDown 2.1s ease-in-out infinite;
+  background: linear-gradient(to top, #ffa700, #ffff00);
+  animation-delay: 0.4s;
+  height: 90%;
+}
+
+.white {
+  animation: scaleUpDown 1.9s ease-in-out infinite, side-to-side 2s ease-in-out infinite alternate;
+  background: linear-gradient(to top, #ffff00, rgba(255,255,255,0.7));
+  animation-delay: 0.5s;
+  height: 80%;
+}
+
+@keyframes scaleUpDown {
+  0%, 100% {
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: scaleY(1.1) scaleX(1.05);
+  }
+}
+
+@keyframes side-to-side {
+  0% {
+    transform: translateX(-5%) scaleX(0.9);
+  }
+  100% {
+    transform: translateX(5%) scaleX(0.9);
   }
 }

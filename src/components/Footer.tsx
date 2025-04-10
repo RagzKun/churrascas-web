@@ -3,6 +3,7 @@ import React from 'react';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { businessInfo } from '../lib/productData';
 
+
 const Footer = () => {
   return (
     <footer className="bg-churrasca-900 text-white py-12">
@@ -12,19 +13,20 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
               <img 
-                src="/assets/logo-white.png" 
+                src="/logo.png" 
                 alt="Churrascas Las Delicias 101" 
-                className="h-10 w-10 mr-3"
+                className="w-[150px] h-[100px] object-contain"
               />
-              <span className="font-display text-xl font-medium">
+              {/* <span className="font-display text-xl font-medium">
                 Churrascas Las Delicias 101
-              </span>
+              </span> */}
             </div>
             <p className="text-white/80 max-w-md">
-              Churrascas artesanales elaboradas con ingredientes de primera calidad y recetas tradicionales del sur de Chile.
+            {/* <p className="font-display text-xl font-medium"> */}
+              Churrascas artesanales elaboradas con ingredientes de  calidad y recetas del sur de Chile.
             </p>
             <div className="flex space-x-4 mt-6">
-              <a 
+              {/* <a 
                 href={businessInfo.socials.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -32,7 +34,7 @@ const Footer = () => {
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
-              </a>
+              </a> */}
               <a 
                 href={businessInfo.socials.instagram} 
                 target="_blank" 
@@ -42,7 +44,7 @@ const Footer = () => {
               >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a 
+              {/* <a 
                 href={businessInfo.socials.twitter} 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -50,13 +52,13 @@ const Footer = () => {
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
-              </a>
+              </a> */}
             </div>
           </div>
           
           {/* Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Enlaces rápidos</h3>
+            <h3 className="text-xl font-medium mb-4">Enlaces rápidos</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-white/80 hover:text-white transition-colors">Inicio</a>
@@ -75,11 +77,11 @@ const Footer = () => {
           
           {/* Contact info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <h3 className="text-xl font-medium mb-4">Contacto</h3>
             <ul className="space-y-2">
               <li className="text-white/80">{businessInfo.address}</li>
               <li className="text-white/80">{businessInfo.phone}</li>
-              <li className="text-white/80">{businessInfo.email}</li>
+              {/* <li className="text-white/80">{businessInfo.email}</li> */}
               <li className="text-white/80">Horario: {businessInfo.hours}</li>
             </ul>
           </div>
@@ -90,10 +92,10 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Churrascas Las Delicias 101. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-white/60 text-sm hover:text-white transition-colors">
+            <a href="#faq" className="text-white/60 text-sm hover:text-white transition-colors">
               Términos y Condiciones
             </a>
-            <a href="#" className="text-white/60 text-sm hover:text-white transition-colors">
+            <a href="#faq" className="text-white/60 text-sm hover:text-white transition-colors">
               Política de Privacidad
             </a>
           </div>

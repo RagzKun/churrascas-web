@@ -48,11 +48,11 @@ const LocationInfo = () => {
                 <div className="w-10 h-10 rounded-full bg-churrasca-100 flex items-center justify-center mr-4">
                   <MapPin className="h-5 w-5 text-churrasca-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-churrasca-900">Dirección</h3>
+                <h3 className="text-xl font-medium leading-7 tracking-normal antialiased text-churrasca-900">Dirección</h3>
               </div>
               <p className="text-churrasca-700">{businessInfo.address}</p>
               <p className="text-churrasca-700 mt-2">
-                Estamos ubicados a solo 5 minutos caminando desde el Metro Las Delicias.
+                Estamos ubicados frente a la copa de agua en Rosario.
               </p>
             </div>
             
@@ -61,7 +61,7 @@ const LocationInfo = () => {
                 <div className="w-10 h-10 rounded-full bg-churrasca-100 flex items-center justify-center mr-4">
                   <Clock className="h-5 w-5 text-churrasca-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-churrasca-900">Horario</h3>
+                <h3 className="text-xl font-medium leading-7 tracking-normal antialiased text-churrasca-900">Horario</h3>
               </div>
               <p className="text-churrasca-700">{businessInfo.hours}</p>
               <p className="text-churrasca-700 mt-2">
@@ -74,10 +74,10 @@ const LocationInfo = () => {
                 <div className="w-10 h-10 rounded-full bg-churrasca-100 flex items-center justify-center mr-4">
                   <Phone className="h-5 w-5 text-churrasca-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-churrasca-900">Contacto</h3>
+                <h3 className="text-xl font-medium leading-7 tracking-normal antialiased text-churrasca-900">Contacto</h3>
               </div>
               <p className="text-churrasca-700">Teléfono: {businessInfo.phone}</p>
-              <p className="text-churrasca-700">Email: {businessInfo.email}</p>
+              {/* <p className="text-churrasca-700">Email: {businessInfo.email}</p> */}
               <a 
                 href={`https://wa.me/${businessInfo.phone.replace(/\+/g, '')}`}
                 target="_blank"

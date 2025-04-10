@@ -41,7 +41,7 @@ const FAQSection = () => {
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex justify-between items-center p-5 text-left transition-colors"
               >
-                <h3 className="font-medium text-lg text-churrasca-900">{faq.question}</h3>
+                <h3 className="font-medium text-xl text-churrasca-900">{faq.question}</h3>
                 {openIndex === index ? (
                   <ChevronUp className="h-5 w-5 text-churrasca-600 flex-shrink-0" />
                 ) : (

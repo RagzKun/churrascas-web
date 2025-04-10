@@ -15,6 +15,7 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'transfer'>('cash');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [isStoreOpen, setIsStoreOpen] = useState(true);
   const cartTotal = getCartTotal();
 
   // Format cart items for WhatsApp message
@@ -48,24 +49,22 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
     
     if (paymentMethod === 'transfer') {
       message += `*Datos de transferencia:*\n`;
-      message += `Nombre: Churrascas Las Delicias 101 SpA\n`;
+      message += `Nombre: Yanet Caroca Elgueta\n`;
       message += `Banco: Banco Estado\n`;
-      message += `Cuenta: 123456789\n`;
-      message += `RUT: 12.345.678-9\n`;
-      message += `Email: pagos@churrascasdelicicias.cl\n\n`;
+      message += `Cuenta: Cuenta Rut\n`;
+      message += `RUT: 12.376.376-9\n`;
+      // message += `Email: pagos@churrascasdelicicias.cl\n\n`;
     }
     
-    message += `*Horario de retiro:* ${businessInfo.hours}\n`;
-    message += `*Ubicación:* ${businessInfo.address}`;
+    // message += `*Horario de retiro:* ${businessInfo.hours}\n`;
+    message += `📍 *Ubicación:* ${businessInfo.address}`;
     
     return encodeURIComponent(message);
   };
 
-  // Open WhatsApp with order
   const handleCheckout = () => {
-    if (items.length === 0) return;
+    if (items.length === 0 || !isStoreOpen) return;
     if (!name || !phone) {
-      // In a real app, you would show a toast here
       console.error('Por favor ingresa tu nombre y teléfono');
       return;
     }
@@ -75,8 +74,8 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
     window.open(whatsappUrl, '_blank');
   };
 
-  // Handle edit item
   const handleEditItem = (item: CartItem) => {
+    if (!isStoreOpen) return;
     editProduct(item.product);
     onClose();
   };
@@ -97,7 +96,6 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
         className="w-full max-w-md h-full bg-white shadow-xl overflow-y-auto animate-slide-in z-10"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="sticky top-0 bg-white p-4 border-b border-churrasca-100 z-10">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-churrasca-900 flex items-center">
@@ -130,10 +128,8 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
             </div>
           ) : (
             <>
-              {/* Products list */}
               <div className="mb-6 space-y-4">
                 {items.map((item) => {
-                  // Calculate item total with extras
                   const itemExtrasTotal = item.selectedExtras.reduce(
                     (sum, extra) => sum + extra.price, 
                     0
@@ -169,7 +165,10 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                         <div className="flex space-x-3 mt-2">
                           <button 
                             onClick={() => handleEditItem(item)}
-                            className="text-xs flex items-center text-churrasca-600 hover:text-churrasca-700"
+                            className={`text-xs flex items-center ${isStoreOpen 
+                              ? 'text-churrasca-600 hover:text-churrasca-700' 
+                              : 'text-gray-400 cursor-not-allowed'}`}
+                            disabled={!isStoreOpen}
                           >
                             <Edit className="h-3 w-3 mr-1" />
                             Editar
@@ -189,7 +188,6 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                 })}
               </div>
               
-              {/* Order summary */}
               <div className="border-t border-churrasca-100 pt-4 mb-6">
                 <div className="flex justify-between py-2">
                   <span className="text-churrasca-700">Subtotal</span>
@@ -206,7 +204,6 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                 </div>
               </div>
               
-              {/* Customer info */}
               <div className="mb-6">
                 <h3 className="text-lg font-medium text-churrasca-900 mb-3">Tus datos</h3>
                 
@@ -221,8 +218,9 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Ingresa tu nombre"
-                      className="w-full p-3 border border-churrasca-200 rounded-lg"
+                      className="w-full p-3 border border-churrasca-200 text-churrasca-900 rounded-lg"
                       required
+                      disabled={!isStoreOpen}
                     />
                   </div>
                   
@@ -236,14 +234,14 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="Ingresa tu número"
-                      className="w-full p-3 border border-churrasca-200 rounded-lg"
+                      className="w-full p-3 border border-churrasca-200 text-churrasca-900 rounded-lg"
                       required
+                      disabled={!isStoreOpen}
                     />
                   </div>
                 </div>
               </div>
               
-              {/* Payment method */}
               <div className="mb-6">
                 <h3 className="text-lg font-medium text-churrasca-900 mb-3">Método de pago</h3>
                 
@@ -251,11 +249,12 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('cash')}
+                    disabled={!isStoreOpen}
                     className={`p-3 border rounded-lg flex items-center justify-center transition-colors
                       ${paymentMethod === 'cash' 
                         ? 'border-churrasca-600 bg-churrasca-50 text-churrasca-900'
                         : 'border-churrasca-200 text-churrasca-700 hover:bg-churrasca-50'
-                      }`}
+                      } ${!isStoreOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <span className="font-medium">Efectivo</span>
                   </button>
@@ -263,11 +262,12 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('transfer')}
+                    disabled={!isStoreOpen}
                     className={`p-3 border rounded-lg flex items-center justify-center transition-colors
                       ${paymentMethod === 'transfer' 
                         ? 'border-churrasca-600 bg-churrasca-50 text-churrasca-900'
                         : 'border-churrasca-200 text-churrasca-700 hover:bg-churrasca-50'
-                      }`}
+                      } ${!isStoreOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <span className="font-medium">Transferencia</span>
                   </button>
@@ -276,21 +276,23 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
                 {paymentMethod === 'transfer' && (
                   <div className="mt-4 bg-churrasca-50 p-3 rounded-lg text-sm">
                     <p className="font-medium text-churrasca-900 mb-1">Datos de transferencia:</p>
-                    <p className="text-churrasca-700">Nombre: Churrascas Las Delicias 101 SpA</p>
+                    <p className="text-churrasca-700">Nombre: Yanet Caroca Elgueta</p>
                     <p className="text-churrasca-700">Banco: Banco Estado</p>
-                    <p className="text-churrasca-700">Cuenta: 123456789</p>
-                    <p className="text-churrasca-700">RUT: 12.345.678-9</p>
-                    <p className="text-churrasca-700">Email: pagos@churrascasdelicicias.cl</p>
+                    <p className="text-churrasca-700">Cuenta: Cuenta Rut</p>
+                    <p className="text-churrasca-700">RUT: 12.376.376-9</p>
+                    {/* <p className="text-churrasca-700">Email: pagos@churrascasdelicicias.cl</p> */}
                   </div>
                 )}
               </div>
               
-              {/* Checkout button */}
               <button 
                 onClick={handleCheckout}
-                disabled={!name || !phone}
-                className="w-full bg-churrasca-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center
-                transition-all duration-300 hover:bg-churrasca-700 hover:shadow-md disabled:bg-churrasca-400 disabled:cursor-not-allowed"
+                disabled={!name || !phone || !isStoreOpen}
+                className={`w-full py-4 rounded-lg font-semibold flex items-center justify-center
+                transition-all duration-300 
+                ${isStoreOpen && name && phone
+                  ? 'bg-churrasca-600 text-white hover:bg-churrasca-700 hover:shadow-md' 
+                  : 'bg-gray-400 text-white cursor-not-allowed'}`}
               >
                 Confirmar Pedido <ArrowRight className="ml-2 h-5 w-5" />
               </button>

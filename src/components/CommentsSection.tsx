@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Send, Trash2, ThumbsUp, ThumbsDown, Image } from 'lucide-react';
+import { MessageCircle, Send, Trash2, ThumbsUp, ThumbsDown, Image, CircleCheck, CircleX } from 'lucide-react';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
@@ -65,10 +65,34 @@ const CommentsSection = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   
+  // Store status for open/closed indicator
+  const [isStoreOpen, setIsStoreOpen] = useState(() => {
+    // Get initial state from localStorage or default to true (open)
+    const savedStatus = localStorage.getItem('storeStatus');
+    return savedStatus !== null ? savedStatus === 'open' : true;
+  });
+  
   // Get comments from localStorage on component mount
   useEffect(() => {
     setComments(getLocalComments());
   }, []);
+  
+  // Update localStorage when store status changes
+  const toggleStoreStatus = () => {
+    if (isAdmin) {
+      const newStatus = !isStoreOpen;
+      setIsStoreOpen(newStatus);
+      localStorage.setItem('storeStatus', newStatus ? 'open' : 'closed');
+      
+      // Force other components to update by dispatching a storage event
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'storeStatus',
+        newValue: newStatus ? 'open' : 'closed'
+      }));
+      
+      toast.success(`Tienda ${newStatus ? 'abierta' : 'cerrada'}`);
+    }
+  };
 
   // Form handling with validation
   const form = useForm<CommentFormValues>({
@@ -204,7 +228,28 @@ const CommentsSection = () => {
           </h3>
         </div>
         {isAdmin && (
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
+            {/* Store Status Toggle for Admin */}
+            <button
+              onClick={toggleStoreStatus}
+              className={`flex items-center gap-2 py-1 px-3 rounded-full text-sm ${
+                isStoreOpen 
+                  ? 'bg-green-100 text-green-700 hover:bg-green-200' 
+                  : 'bg-red-100 text-red-700 hover:bg-red-200'
+              }`}
+            >
+              {isStoreOpen ? (
+                <>
+                  <CircleCheck className="h-4 w-4" />
+                  <span>Abierto</span>
+                </>
+              ) : (
+                <>
+                  <CircleX className="h-4 w-4" />
+                  <span>Cerrado</span>
+                </>
+              )}
+            </button>
             <span className="bg-green-100 text-green-700 text-xs py-1 px-2 rounded-md">Modo Administrador</span>
           </div>
         )}

@@ -129,6 +129,17 @@ const Navbar = ({
           </a>
           
 
+          {/* Instagram Icon */}
+          <a 
+            href="https://www.instagram.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`${isScrolled ? 'text-black dark:text-white' : 'text-white'} hover:text-churrasca-600 transition-colors focus-visible-ring rounded-md`}
+            aria-label="Síguenos en Instagram"
+          >
+            <Instagram className="h-5 w-5" aria-hidden="true" />
+          </a>
+
           {/* Theme Toggle */}
           {/* <ThemeToggle /> */}
           

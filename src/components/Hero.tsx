@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 // import { motion } from 'framer-motion';
 
@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <div 
       ref={heroRef} 
-      className="min-h-screen relative flex items-center justify-center overflow-hidden pt-16"
+      className="min-h-screen relative flex items-center justify-center animate-on-scroll pt-16"
       id="hero"
     >
       {/* Flaming background with animation */}
@@ -36,14 +36,7 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Dark overlay to improve text visibility */}
-      <div 
-        className="absolute inset-0 z-1 bg-gradient-to-t from-black/70 to-black/20"
-        aria-hidden="true"
-      />
-      
-      {/* Content with guaranteed visibility */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 z-10">
         <div 
           ref={contentRef}
           className="max-w-3xl mx-auto text-center"
@@ -79,14 +72,14 @@ const Hero = () => {
           {/* Subtitle with guaranteed visibility */}
           
           
-          {/* CTA Button */}
+          {/* CTA Button - Improved for accessibility */}
           <a 
             href="#productos" 
             className="inline-flex items-center bg-churrasca-600 text-white px-8 py-4 rounded-lg text-lg font-medium 
-            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl"
+            transition-all duration-300 hover:bg-churrasca-700 hover:scale-105 hover:shadow-xl focus-visible-ring"
             aria-label="Ver menú de churrascas"
           >
-            Ver Menú <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            Ver Menú <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
           </a>
 
           {/* Scroll indicator */}

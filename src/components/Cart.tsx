@@ -1,6 +1,5 @@
-
-import React, { useState } from 'react';
-import { X, ShoppingBag, Trash2, Edit, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ShoppingBag, Trash2, Edit, ArrowRight, AlertCircle } from 'lucide-react';
 import { useCart, CartItem, Product } from '../context/CartContext';
 import { businessInfo } from '../lib/productData';
 
@@ -17,8 +16,25 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
   const [phone, setPhone] = useState('');
   const [isStoreOpen, setIsStoreOpen] = useState(true);
   const cartTotal = getCartTotal();
+  
+  useEffect(() => {
+    const checkStoreStatus = () => {
+      const storeStatus = localStorage.getItem('storeStatus');
+      setIsStoreOpen(storeStatus !== 'closed');
+    };
+    
+    checkStoreStatus();
+    
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'storeStatus') {
+        setIsStoreOpen(e.newValue !== 'closed');
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
-  // Format cart items for WhatsApp message
   const formatCartForWhatsApp = () => {
     if (items.length === 0) return '';
     
@@ -111,7 +127,15 @@ const Cart = ({ isOpen, onClose, editProduct }: CartProps) => {
           </div>
         </div>
         
-        {/* Cart content */}
+        {!isStoreOpen && (
+          <div className="p-4 bg-red-50 border-b border-red-200">
+            <div className="flex items-center text-red-700">
+              <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
+              <p>La tienda está cerrada. No se pueden realizar pedidos en este momento.</p>
+            </div>
+          </div>
+        )}
+        
         <div className="p-4">
           {items.length === 0 ? (
             <div className="text-center py-12">

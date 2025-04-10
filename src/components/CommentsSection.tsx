@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { MessageCircle, Send, Trash2, ThumbsUp, ThumbsDown, Image, CircleCheck, CircleX } from 'lucide-react';
-import { Button } from './ui/button';
-import { Textarea } from './ui/textarea';
-import { Input } from './ui/input';
-import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { 
+import React, { useState, useEffect } from "react";
+import {
+  MessageCircle,
+  Send,
+  Trash2,
+  ThumbsUp,
+  ThumbsDown,
+  Image,
+  CircleCheck,
+  CircleX,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
+import { Input } from "./ui/input";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -33,8 +42,8 @@ interface Comment {
 
 // Form schema with validation
 const commentFormSchema = z.object({
-  name: z.string().min(1, { message: 'Por favor ingresa tu nombre' }),
-  comment: z.string().min(1, { message: 'Por favor ingresa un comentario' }),
+  name: z.string().min(1, { message: "Por favor ingresa tu nombre" }),
+  comment: z.string().min(1, { message: "Por favor ingresa un comentario" }),
   imageUrl: z.string().optional(),
 });
 
@@ -45,14 +54,14 @@ const ADMIN_PASSWORD = "admin101churrascas";
 
 // Use localStorage for persistent storage
 const getLocalComments = (): Comment[] => {
-  if (typeof window === 'undefined') return [];
-  const storedComments = localStorage.getItem('productComments');
+  if (typeof window === "undefined") return [];
+  const storedComments = localStorage.getItem("productComments");
   return storedComments ? JSON.parse(storedComments) : [];
 };
 
 const saveLocalComments = (comments: Comment[]) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('productComments', JSON.stringify(comments));
+  if (typeof window !== "undefined") {
+    localStorage.setItem("productComments", JSON.stringify(comments));
   }
 };
 
@@ -60,16 +69,16 @@ const CommentsSection = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminDialogOpen, setAdminDialogOpen] = useState(false);
-  const [adminPassword, setAdminPassword] = useState('');
+  const [adminPassword, setAdminPassword] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   // Store status for open/closed indicator
   const [isStoreOpen, setIsStoreOpen] = useState(() => {
     // Get initial state from localStorage or default to true (open)
-    const savedStatus = localStorage.getItem('storeStatus');
-    return savedStatus !== null ? savedStatus === 'open' : true;
+    const savedStatus = localStorage.getItem("storeStatus");
+    return savedStatus !== null ? savedStatus === "open" : true;
   });
-  
+
   // Get comments from localStorage on component mount
   useEffect(() => {
     setComments(getLocalComments());
@@ -79,15 +88,17 @@ const CommentsSection = () => {
     if (isAdmin) {
       const newStatus = !isStoreOpen;
       setIsStoreOpen(newStatus);
-      localStorage.setItem('storeStatus', newStatus ? 'open' : 'closed');
-      
+      localStorage.setItem("storeStatus", newStatus ? "open" : "closed");
+
       // Force other components to update by dispatching a storage event
-      window.dispatchEvent(new StorageEvent('storage', {
-        key: 'storeStatus',
-        newValue: newStatus ? 'open' : 'closed'
-      }));
-      
-      toast.success(`Tienda ${newStatus ? 'abierta' : 'cerrada'}`);
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: "storeStatus",
+          newValue: newStatus ? "open" : "closed",
+        })
+      );
+
+      toast.success(`Tienda ${newStatus ? "abierta" : "cerrada"}`);
     }
   };
 
@@ -95,10 +106,10 @@ const CommentsSection = () => {
   const form = useForm<CommentFormValues>({
     resolver: zodResolver(commentFormSchema),
     defaultValues: {
-      name: '',
-      comment: '',
-      imageUrl: '',
-    }
+      name: "",
+      comment: "",
+      imageUrl: "",
+    },
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,13 +119,13 @@ const CommentsSection = () => {
       setSelectedImage(null);
       return;
     }
-    
+
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      toast.error('Por favor sube solo archivos de imagen');
+    if (!file.type.startsWith("image/")) {
+      toast.error("Por favor sube solo archivos de imagen");
       return;
     }
-    
+
     // Create URL for preview
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
@@ -150,11 +161,11 @@ const CommentsSection = () => {
     const updatedComments = [newComment, ...comments];
     setComments(updatedComments);
     saveLocalComments(updatedComments);
-    
+
     form.reset();
     setImagePreview(null);
     setSelectedImage(null);
-    toast.success('¡Gracias por tu comentario!');
+    toast.success("¡Gracias por tu comentario!");
   };
 
   const handleDeleteComment = (commentId: string) => {
@@ -171,25 +182,27 @@ const CommentsSection = () => {
   const handleAdminLogin = () => {
     if (adminPassword === ADMIN_PASSWORD) {
       setIsAdmin(true);
-      setAdminPassword('');
+      setAdminPassword("");
       setAdminDialogOpen(false);
-      toast.success('¡Modo administrador activado!');
+      toast.success("¡Modo administrador activado!");
     } else {
-      toast.error('Contraseña incorrecta');
+      toast.error("Contraseña incorrecta");
     }
   };
 
   const deleteComment = (commentId: string) => {
-    const updatedComments = comments.filter(comment => comment.id !== commentId);
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    );
     setComments(updatedComments);
     saveLocalComments(updatedComments);
-    toast.success('Comentario eliminado');
+    toast.success("Comentario eliminado");
   };
 
-  const updateCommentVote = (commentId: string, type: 'like' | 'dislike') => {
-    const updatedComments = comments.map(comment => {
+  const updateCommentVote = (commentId: string, type: "like" | "dislike") => {
+    const updatedComments = comments.map((comment) => {
       if (comment.id === commentId) {
-        if (type === 'like') {
+        if (type === "like") {
           return { ...comment, likes: comment.likes + 1 };
         } else {
           return { ...comment, dislikes: comment.dislikes + 1 };
@@ -197,21 +210,25 @@ const CommentsSection = () => {
       }
       return comment;
     });
-    
+
     setComments(updatedComments);
     saveLocalComments(updatedComments);
-    toast.success(type === 'like' ? 'Comentario marcado como útil' : 'Comentario marcado como no útil');
+    toast.success(
+      type === "like"
+        ? "Comentario marcado como útil"
+        : "Comentario marcado como no útil"
+    );
   };
 
   // Format date
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
-    return date.toLocaleDateString('es-CL', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return date.toLocaleDateString("es-CL", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -230,9 +247,9 @@ const CommentsSection = () => {
             <button
               onClick={toggleStoreStatus}
               className={`flex items-center gap-2 py-1 px-3 rounded-full text-sm ${
-                isStoreOpen 
-                  ? 'bg-green-100 text-green-700 hover:bg-green-200' 
-                  : 'bg-red-100 text-red-700 hover:bg-red-200'
+                isStoreOpen
+                  ? "bg-green-100 text-green-700 hover:bg-green-200"
+                  : "bg-red-100 text-red-700 hover:bg-red-200"
               }`}
             >
               {isStoreOpen ? (
@@ -247,7 +264,9 @@ const CommentsSection = () => {
                 </>
               )}
             </button>
-            <span className="bg-green-100 text-green-700 text-xs py-1 px-2 rounded-md">Modo Administrador</span>
+            <span className="bg-green-100 text-green-700 text-xs py-1 px-2 rounded-md">
+              Modo Administrador
+            </span>
           </div>
         )}
       </div>
@@ -294,10 +313,10 @@ const CommentsSection = () => {
             <label className="block text-sm font-medium text-churrasca-800 dark:text-churrasca-200">
               Adjuntar imagen (opcional)
             </label>
-            
+
             <div className="flex items-center gap-2">
-              <label 
-                htmlFor="comment-image" 
+              <label
+                htmlFor="comment-image"
                 className="cursor-pointer flex items-center gap-2 px-3 py-2 border border-churrasca-200 rounded-md hover:bg-churrasca-50 dark:border-churrasca-700 dark:hover:bg-gray-800"
               >
                 <Image className="h-5 w-5 text-churrasca-600" />
@@ -311,17 +330,17 @@ const CommentsSection = () => {
                 onChange={handleImageChange}
               />
             </div>
-            
+
             {imagePreview && (
               <div className="mt-2">
                 <div className="relative inline-block">
-                  <img 
-                    src={imagePreview} 
-                    alt="Vista previa" 
-                    className="h-24 w-auto object-cover rounded-md border border-churrasca-200" 
+                  <img
+                    src={imagePreview}
+                    alt="Vista previa"
+                    className="h-24 w-auto object-cover rounded-md border border-churrasca-200"
                   />
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => {
                       setImagePreview(null);
                       setSelectedImage(null);
@@ -335,8 +354,8 @@ const CommentsSection = () => {
             )}
           </div>
 
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="bg-churrasca-600 hover:bg-churrasca-700 text-white"
           >
             <Send className="h-4 w-4 mr-2" />
@@ -349,51 +368,55 @@ const CommentsSection = () => {
       <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <div 
-              key={comment.id} 
+            <div
+              key={comment.id}
               className="border-b border-churrasca-100 dark:border-churrasca-800 pb-4"
             >
               <div className="flex justify-between items-center mb-1">
                 <h4 className="font-medium text-churrasca-800 dark:text-churrasca-200 flex items-center gap-1">
                   {comment.name}
                   {comment.isAdmin && (
-                    <span className="bg-churrasca-100 text-xs text-churrasca-700 px-1 rounded ml-1">Admin</span>
+                    <span className="bg-churrasca-100 text-xs text-churrasca-700 px-1 rounded ml-1">
+                      Admin
+                    </span>
                   )}
                 </h4>
                 <span className="text-xs text-churrasca-500 dark:text-churrasca-400">
                   {formatDate(comment.timestamp)}
                 </span>
               </div>
-              <p className="text-gray-700 dark:text-gray-300 mb-2">{comment.text}</p>
-              
+              <p className="text-gray-700 dark:text-gray-300 mb-2">
+                {comment.text}
+              </p>
+
               {/* Display image if present */}
               {comment.imageUrl && (
                 <div className="mt-2 mb-3">
-                  <img 
-                    src={comment.imageUrl} 
-                    alt="Imagen adjunta" 
-                    className="max-h-48 w-auto object-cover rounded-md border border-churrasca-200" 
+                  <img
+                    src={comment.imageUrl}
+                    alt="Imagen adjunta"
+                    className="max-h-48 w-auto object-cover rounded-md border border-churrasca-200"
                   />
                 </div>
               )}
-              
+
               {/* Comment actions */}
               <div className="flex items-center gap-4 mt-2">
-                <button 
-                  onClick={() => updateCommentVote(comment.id, 'like')}
+                <button
+                  onClick={() => updateCommentVote(comment.id, "like")}
                   className="flex items-center gap-1 text-xs text-churrasca-600 hover:text-churrasca-800"
                 >
                   <ThumbsUp className="h-3.5 w-3.5" />
                   <span>Útil ({comment.likes})</span>
                 </button>
-                <button 
-                  onClick={() => updateCommentVote(comment.id, 'dislike')}
+                <button
+                  onClick={() => updateCommentVote(comment.id, "dislike")}
                   className="flex items-center gap-1 text-xs text-churrasca-600 hover:text-churrasca-800"
                 >
                   <ThumbsDown className="h-3.5 w-3.5" />
                   <span>No útil ({comment.dislikes})</span>
                 </button>
-                <button 
+                <button
                   onClick={() => handleDeleteComment(comment.id)}
                   className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 ml-auto"
                 >
@@ -420,16 +443,18 @@ const CommentsSection = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="py-4">
-            <Input 
-              type="password" 
-              placeholder="Contraseña" 
+            <Input
+              type="password"
+              placeholder="Contraseña"
               value={adminPassword}
               onChange={(e) => setAdminPassword(e.target.value)}
             />
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={handleAdminLogin}>Confirmar</AlertDialogAction>
+            <AlertDialogAction onClick={handleAdminLogin}>
+              Confirmar
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

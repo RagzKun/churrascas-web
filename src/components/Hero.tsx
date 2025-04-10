@@ -14,8 +14,8 @@ const Hero = () => {
       className="min-h-screen relative flex items-center justify-center overflow-hidden pt-16"
       id="hero"
     >
-      {/* Flaming background with animation */}
-      <div className="absolute inset-0 z-0 flames-container">
+      {/* Flaming background with animation - now only in bottom half */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/2 z-0 flames-container">
         <div className="flame-wrapper">
           <div className="flame red"></div>
           <div className="flame orange"></div>
@@ -38,7 +38,7 @@ const Hero = () => {
       
       {/* Dark overlay to improve text visibility */}
       <div 
-        className="absolute inset-0 z-1 bg-black/50"
+        className="absolute inset-0 z-1 bg-gradient-to-t from-black/70 to-black/20"
         aria-hidden="true"
       />
       

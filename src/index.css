@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -208,28 +209,28 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #000;
+  background-color: transparent;
   z-index: 0;
 }
 
 .flame-wrapper {
   position: absolute;
-  bottom: -50%;
+  bottom: -60%; /* Positioned lower to only show at bottom */
   left: 0;
   width: 100%;
-  height: 150%;
+  height: 120%; /* Reduced height */
   transform: scale(1.5);
 }
 
 .offset-right {
   left: 25%;
-  bottom: -45%;
+  bottom: -55%;
   transform: scale(1.2);
 }
 
 .offset-left {
   left: -25%;
-  bottom: -55%;
+  bottom: -65%;
   transform: scale(1.3);
 }
 

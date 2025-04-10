@@ -14,15 +14,31 @@ const Hero = () => {
       className="min-h-screen relative flex items-center justify-center overflow-hidden pt-16"
       id="hero"
     >
-      {/* Background image with a specific z-index */}
+      {/* Flaming background with animation */}
+      <div className="absolute inset-0 z-0 flames-container">
+        <div className="flame-wrapper">
+          <div className="flame red"></div>
+          <div className="flame orange"></div>
+          <div className="flame gold"></div>
+          <div className="flame white"></div>
+        </div>
+        <div className="flame-wrapper offset-right">
+          <div className="flame red"></div>
+          <div className="flame orange"></div>
+          <div className="flame gold"></div>
+          <div className="flame white"></div>
+        </div>
+        <div className="flame-wrapper offset-left">
+          <div className="flame red"></div>
+          <div className="flame orange"></div>
+          <div className="flame gold"></div>
+          <div className="flame white"></div>
+        </div>
+      </div>
+      
+      {/* Dark overlay to improve text visibility */}
       <div 
-        className="absolute inset-0 z-0"
-        style={{ 
-          backgroundImage: 'url("/assets/hero-background.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'brightness(0.5)'
-        }}
+        className="absolute inset-0 z-1 bg-black/50"
         aria-hidden="true"
       />
       
@@ -52,7 +68,7 @@ const Hero = () => {
           </div>
           
           {/* Title with guaranteed visibility */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 font-bold">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 font-bold text-shadow-lg">
             Churrascas Artesanales Hechas con Tradición
           </h1>
           
